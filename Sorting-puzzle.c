@@ -21,16 +21,22 @@ int checkRepeat(int val, int mat[ROW][COL]){
     return 0;
 }
 
-void displayMatrix(int mat[ROW][COL]){
+void displayMatrix(int mat[ROW][COL], int m, int n){
     
     printf("The game is: \n");
     for (int i = 0; i < ROW; i++)
-    {
+    {   
+        int flag = 1;
         for (int j = 0; j < COL; j++)
-        {
+        {   
+            if(i == m && j == n){
+                printf("[%d]\t", mat[i][j]);
+            }else{
             printf("%d\t", mat[i][j]);
         }
-        printf("\n");
+        }
+        // printf("\n");
+        if(flag) printf("\n");
     }
     
 }
@@ -69,6 +75,23 @@ void swap(int matrix[ROW][COL], int m, int n, int p, int q){
 
 }
 
+int checkMatrix(int matrix[ROW][COL]){
+    
+    int val = 0;
+    for (int i = 0; i < ROW; i++)
+    {
+        for (int j = 0; j < COL; j++)
+        {
+            if(matrix[i][j] < val){
+                if(i == ROW-1 && j == COL-1 && matrix[i][j] == 0) return 1;
+                return 0;
+            }
+            val = matrix[i][j];
+        }
+    }
+    return 0;
+}
+
 char menu(){
     
     printf("Move 0 using W,S,A,D and press X to quit\n");
@@ -81,9 +104,9 @@ void main(){
     int matrix[ROW][COL];
 
     setMatrix(matrix);
-    displayMatrix(matrix);
-    
     int m = ROW-1, n = COL-1;
+    displayMatrix(matrix, m, n);
+    
     char choice;
 
     for ( choice = menu(); choice != 'x'; choice = menu())
@@ -119,7 +142,12 @@ void main(){
                 break;
         }
         system("cls");
-        displayMatrix(matrix);
+        if(checkMatrix(matrix)){
+            printf("Success!!!!!!!!!!");
+        }else{
+            printf("Try again\n");
+        }   
+        displayMatrix(matrix, m, n);
     }
     
 
