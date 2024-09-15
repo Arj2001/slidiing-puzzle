@@ -1,0 +1,4 @@
+.vscode
+*.exe
+demo.c
+allCharacter.c
