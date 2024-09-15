@@ -1,8 +1,8 @@
 #include<stdio.h>
 #include<stdlib.h>
 #include<time.h>
-#define ROW 4
-#define COL 4
+#define ROW 2
+#define COL 2
 
 int checkRepeat(int val, int mat[ROW][COL]){
     
@@ -23,7 +23,6 @@ int checkRepeat(int val, int mat[ROW][COL]){
 
 void displayMatrix(int mat[ROW][COL], int m, int n){
     
-    printf("The game is: \n");
     for (int i = 0; i < ROW; i++)
     {   
         int flag = 1;
@@ -104,10 +103,11 @@ void main(){
     int matrix[ROW][COL];
 
     setMatrix(matrix);
-    int m = ROW-1, n = COL-1;
+    int m = ROW-1, n = COL-1, win = 0;
     displayMatrix(matrix, m, n);
     
     char choice;
+    int moves = 0;
 
     for ( choice = menu(); choice != 'x'; choice = menu())
     {
@@ -117,24 +117,28 @@ void main(){
                 if(m-1 >= 0){
                     swap(matrix, m, n, m-1, n);
                     m--;
+                    moves++;
                 }
                 break;
             case 's':
                 if(m+1 < ROW){
                     swap(matrix, m, n, m+1, n);
                     m++;
+                    moves++;
                 }
                 break;
             case 'a':
                 if(n-1 >= 0){
                     swap(matrix, m, n, m, n-1);
                     n--;
+                    moves++;
                 }                
                 break;
             case 'd':
                 if(n+1 < COL){
                     swap(matrix, m, n, m, n+1);
                     n++;
+                    moves++;
                 }
                 break;
             default:
@@ -142,12 +146,15 @@ void main(){
                 break;
         }
         system("cls");
-        if(checkMatrix(matrix)){
-            printf("Success!!!!!!!!!!");
-        }else{
-            printf("Try again\n");
-        }   
+        printf("Total moves : %d\n", moves);
         displayMatrix(matrix, m, n);
+        if(checkMatrix(matrix)){
+            printf("Success!!!!!!!!!!\n");
+            printf("You completed the game with %d moves", moves);
+            win = 1;
+            break;
+        }
+        
     }
     
 
