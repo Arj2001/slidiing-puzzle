@@ -1,8 +1,8 @@
 #include<stdio.h>
 #include<stdlib.h>
 #include<time.h>
-#define ROW 2
-#define COL 2
+#define ROW 4
+#define COL 4
 
 int checkRepeat(int val, int mat[ROW][COL]){
     
