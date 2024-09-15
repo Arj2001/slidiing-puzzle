@@ -93,7 +93,7 @@ int checkMatrix(int matrix[ROW][COL]){
 
 char menu(){
     
-    printf("Move 0 using W,S,A,D and press X to quit\n");
+    printf("Move [0] using arrow key and press esc to quit\n");
     return getch();
 }
 
@@ -109,32 +109,32 @@ void main(){
     char choice;
     int moves = 0;
 
-    for ( choice = menu(); choice != 'x'; choice = menu())
-    {
+    for ( choice = menu(); choice != 27; choice = menu())
+    {   
         switch (choice)
         {
-            case 'w':
+            case 72:
                 if(m-1 >= 0){
                     swap(matrix, m, n, m-1, n);
                     m--;
                     moves++;
                 }
                 break;
-            case 's':
+            case 80:
                 if(m+1 < ROW){
                     swap(matrix, m, n, m+1, n);
                     m++;
                     moves++;
                 }
                 break;
-            case 'a':
+            case 75:
                 if(n-1 >= 0){
                     swap(matrix, m, n, m, n-1);
                     n--;
                     moves++;
                 }                
                 break;
-            case 'd':
+            case 77:
                 if(n+1 < COL){
                     swap(matrix, m, n, m, n+1);
                     n++;
@@ -142,7 +142,6 @@ void main(){
                 }
                 break;
             default:
-                printf("Wrong choice\n");
                 break;
         }
         system("cls");
